@@ -1,0 +1,85 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Registrar Crédito</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/consulta">
+        Ver Lista
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <form [formGroup]="creditoForm" (ngSubmit)="onSubmit()">
+
+  <ion-item>
+    <ion-input label="Nombre del Cliente" labelPlacement="stacked" formControlName="nombreCliente" placeholder="Ej. Juan Pérez"></ion-input>
+  </ion-item>
+  @if (creditoForm.get('nombreCliente')?.touched && creditoForm.get('nombreCliente')?.invalid) {
+    <ion-text color="danger">
+      <p style="padding-left: 16px; font-size: 12px;">El nombre es obligatorio (mínimo 3 caracteres).</p>
+    </ion-text>
+  }
+
+  <ion-item>
+    <ion-input label="Cédula" labelPlacement="stacked" type="text" formControlName="cedula" placeholder="Ej. 10987654"></ion-input>
+  </ion-item>
+  @if (creditoForm.get('cedula')?.touched && creditoForm.get('cedula')?.invalid) {
+    <ion-text color="danger">
+      <p style="padding-left: 16px; font-size: 12px;">Ingrese una cédula válida (6 a 10 dígitos).</p>
+    </ion-text>
+  }
+
+  <ion-item>
+    <ion-input label="Valor del Crédito" labelPlacement="stacked" type="number" formControlName="valorCredito" placeholder="Ej. 5000000"></ion-input>
+  </ion-item>
+  @if (creditoForm.get('valorCredito')?.touched && creditoForm.get('valorCredito')?.invalid) {
+    <ion-text color="danger">
+      <p style="padding-left: 16px; font-size: 12px;">El valor mínimo debe ser $100,000.</p>
+    </ion-text>
+  }
+
+  <ion-item>
+    <ion-input label="Tasa de Interés (%)" labelPlacement="stacked" type="number" formControlName="tasaInteres" placeholder="Ej. 2.0"></ion-input>
+  </ion-item>
+  @if (creditoForm.get('tasaInteres')?.touched && creditoForm.get('tasaInteres')?.invalid) {
+    <ion-text color="danger">
+      <p style="padding-left: 16px; font-size: 12px;">Ingrese una tasa válida (0.1 a 100).</p>
+    </ion-text>
+  }
+
+  <ion-item>
+    <ion-input label="Plazo (Meses)" labelPlacement="stacked" type="number" formControlName="plazoMeses" placeholder="Ej. 12"></ion-input>
+  </ion-item>
+  @if (creditoForm.get('plazoMeses')?.touched && creditoForm.get('plazoMeses')?.invalid) {
+    <ion-text color="danger">
+      <p style="padding-left: 16px; font-size: 12px;">El plazo debe estar entre 1 y 360 meses.</p>
+    </ion-text>
+  }
+
+  <ion-item>
+    <ion-input label="Comercial" labelPlacement="stacked" formControlName="comercial" placeholder="Ej. Carlos Ruiz"></ion-input>
+  </ion-item>
+  @if (creditoForm.get('comercial')?.touched && creditoForm.get('comercial')?.invalid) {
+    <ion-text color="danger">
+      <p style="padding-left: 16px; font-size: 12px;">El nombre del comercial es obligatorio.</p>
+    </ion-text>
+  }
+
+  <ion-button expand="block" type="submit" class="ion-margin-top">
+    Registrar Crédito
+  </ion-button>
+
+</form>
+
+  <!-- Componente nativo de aviso visual -->
+  <ion-toast
+    [isOpen]="isToastOpen"
+    [message]="toastMessage"
+    [color]="toastColor"
+    duration="3000"
+    (didDismiss)="isToastOpen = false">
+  </ion-toast>
+
+</ion-content>
