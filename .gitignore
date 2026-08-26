@@ -1,0 +1,9 @@
+# =========================
+# FRONTEND (Ionic / Angular)
+# =========================
+node_modules/
+dist/
+www/
+.angular/
+.capacitor/
+*.log
